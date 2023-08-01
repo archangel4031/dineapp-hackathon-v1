@@ -1,13 +1,14 @@
 import React from "react";
-import { ProductList } from "@/lib/mockups/MockProducts";
+import { getProducts } from "@/../sanity/sanity-utils";
 import ProductCard from "@/components/subcomponents/ProductCard";
 
-export default function Page() {
+export default async function Page() {
+    const products = await getProducts();
     return (
         <section className="container mx-auto py-20">
             <div className="grid grid-cols-4 grid-flow-row justify-around mt-4 gap-16">
-                {ProductList.map((product) => (
-                    <ProductCard key={product.id} {...product} />
+                {products.map((product) => (
+                    <ProductCard key={product._id} {...product} />
                 ))}
             </div>
         </section>

@@ -3,7 +3,7 @@ export function decodeURLString(urlString: string): string {
 }
 
 export function MakeURLFromTitle(str: string): string {
-    let inTitle:string = decodeURLString(str);
+    let inTitle: string = decodeURLString(str);
     return inTitle.replace(/\s+/g, "-").toLowerCase();
 }
 
@@ -17,4 +17,13 @@ export interface CardProps {
     category: string;
     className?: string;
 }
-
+export interface productInterface {
+    _id: string;
+    _createdAt: Date;
+    title: string;
+    slug: string;
+    image: string;
+    imageAlt: string;
+    price: number;
+    category: string;
+}
