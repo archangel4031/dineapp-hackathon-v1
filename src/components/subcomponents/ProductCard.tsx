@@ -12,16 +12,17 @@ export default function ProductCard({
     id,
 }: CardProps) {
     let url: string = MakeURLFromTitle(title);
+    let url2: string = MakeURLFromTitle(imageSrc);
     return (
         <div className="flex flex-col gap-1">
             <Link
                 href={{
                     pathname: `/products/[title]`,
                     query: {
-                        id: id,
+                        item_id: title,
                     },
                 }}
-                as={`/products/${url}`}
+                as={`/products/${id}`}
             >
                 <div className="relative w-80 h-96">
                     <Image
