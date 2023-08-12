@@ -26,4 +26,5 @@ export interface productInterface {
     imageAlt: string;
     price: number;
     category: string;
+    className?: string;
 }

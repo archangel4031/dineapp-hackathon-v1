@@ -11,9 +11,12 @@ export default function ProductCard({
     category,
     slug,
     _id,
+    className,
 }: productInterface) {
+    const style = "flex flex-col gap-1";
+    const propStyle = `${style} ${className}`;
     return (
-        <div className="flex flex-col gap-1">
+        <div className={propStyle}>
             <Link href={`/products/${slug}`} key={_id}>
                 <div className="relative w-80 h-96">
                     <Image
