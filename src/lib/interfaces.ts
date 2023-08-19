@@ -1,12 +1,3 @@
-export function decodeURLString(urlString: string): string {
-    return decodeURIComponent(urlString);
-}
-
-export function MakeURLFromTitle(str: string): string {
-    let inTitle: string = decodeURLString(str);
-    return inTitle.replace(/\s+/g, "-").toLowerCase();
-}
-
 export interface CardProps {
     id: number;
     title: string;
@@ -27,4 +18,13 @@ export interface productInterface {
     price: number;
     category: string;
     className?: string;
+    totalPrice?: number;
+    userID?: string;
+    quantity: number;
+}
+
+export interface CartState {
+    cartItems: Array<productInterface>;
+    totalPrice: number;
+    totalQuantity: number;
 }
