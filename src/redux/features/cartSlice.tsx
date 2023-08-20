@@ -21,7 +21,7 @@ export const cartSlice = createSlice({
             }>
         ) {
             const newItem = action.payload.product;
-            const existingItem: productInterface | undefined = state.cartItems.find((item) => item._id === newItem._id);
+            const existingItem = state.cartItems.find((item) => item._id === newItem._id);
             state.totalQuantity += action.payload.quantity;
             state.totalPrice += newItem.price * action.payload.quantity;
             const totalPrice = newItem.price * action.payload.quantity;
@@ -33,9 +33,9 @@ export const cartSlice = createSlice({
                     totalPrice,
                 });
             } else {
-                const totalPrice = existingItem.totalPrice + existingItem.price * action.payload.quantity;
+                const totalPrice = existingItem.totalPrice || 0 + existingItem.price * action.payload.quantity;
                 existingItem.quantity += action.payload.quantity;
-                existingItem.totalPrice += totalPrice;
+                existingItem.totalPrice = existingItem.totalPrice || 0 + totalPrice;
             }
         },
 
@@ -43,7 +43,7 @@ export const cartSlice = createSlice({
             const productID = action.payload;
             state.cartItems = state.cartItems.filter((item) => item._id !== productID);
             state.totalQuantity = state.cartItems.reduce((total, item) => total + item.quantity, 0);
-            state.totalPrice = state.cartItems.reduce((total, item) => total + item.totalPrice, 0);
+            state.totalPrice = state.cartItems.reduce((total, item) => total + (item.totalPrice || 0), 0);
         },
 
         decrementCartProduct(state: CartState, action: PayloadAction<string>) {
@@ -56,7 +56,7 @@ export const cartSlice = createSlice({
                 state.cartItems = state.cartItems.filter((item) => item._id !== Product);
             } else {
                 existingItem!.quantity--;
-                existingItem!.totalPrice = existingItem!.totalPrice - existingItem?.price!;
+                existingItem!.totalPrice = existingItem!.totalPrice || 0 - existingItem?.price!;
             }
         },
     },

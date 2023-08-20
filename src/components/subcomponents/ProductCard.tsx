@@ -13,18 +13,13 @@ export default function ProductCard({
     _id,
     className,
 }: productInterface) {
-    const style = "flex flex-col gap-1";
+    const style = "flex flex-col justify-center items-center gap-1";
     const propStyle = `${style} ${className}`;
     return (
         <div className={propStyle}>
             <Link href={`/products/${slug}`} key={_id}>
                 <div className="relative w-80 h-96">
-                    <Image
-                        src={image}
-                        alt={imageAlt}
-                        style={{ objectFit: "cover" }}
-                        fill={true}
-                    />
+                    <Image src={image} alt={imageAlt} style={{ objectFit: "cover" }} fill={true} />
                 </div>
                 <h1 className="text-xl font-bold tracking-wide">{title}</h1>
                 <p className="text-xl">$ {price}</p>
