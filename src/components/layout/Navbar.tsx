@@ -3,7 +3,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ShoppingCart } from "lucide-react";
-import { useAppSelector } from "@/redux/store";
+import { useAppSelector } from "@/lib/redux/store";
 
 export default function Navbar() {
     const totalItems = useAppSelector((state) => state.cart.totalQuantity);
@@ -29,10 +29,12 @@ export default function Navbar() {
                 <Link href={"/products"}>All Products</Link>
             </div>
             <div className="relative w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
-                <ShoppingCart />
-                <span className="absolute left-7 bottom-7 w-5 h-5 bg-[#f02d34] text-white text-xs rounded-full flex justify-center items-center">
-                    {totalItems}
-                </span>
+                <Link href={"/cart"}>
+                    <ShoppingCart />
+                    <span className="absolute left-7 bottom-7 w-5 h-5 bg-[#f02d34] text-white text-xs rounded-full flex justify-center items-center">
+                        {totalItems}
+                    </span>
+                </Link>
             </div>
         </div>
     );

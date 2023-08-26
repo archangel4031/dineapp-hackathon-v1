@@ -8,6 +8,7 @@ interface Props {
 export default async function Page({ params }: Props) {
     const slug = params.title;
     const product = await getSingleProduct(slug);
+    const defaultUserID = "123";
 
     return (
         <section className="container mx-auto py-20">
@@ -36,7 +37,7 @@ export default async function Page({ params }: Props) {
                             XL
                         </li>
                     </ul>
-                    <AddToCartButton product={product} />
+                    <AddToCartButton product={product} userID={product.userID || defaultUserID} />
                 </div>
             </div>
         </section>

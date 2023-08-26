@@ -23,6 +23,16 @@ export interface productInterface {
     quantity: number;
 }
 
+export interface ICartItems {
+    _id: number;
+    title: string;
+    image: string;
+    price: number;
+    quantity: number;
+    totalPrice: number;
+    user_id: string;
+}
+
 export interface CartState {
     cartItems: Array<productInterface>;
     totalPrice: number;
