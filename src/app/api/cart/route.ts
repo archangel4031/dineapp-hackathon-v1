@@ -1,14 +1,15 @@
 import { addToCart, cartTable, db } from "@/lib/drizzle";
+import { auth } from "@clerk/nextjs";
 import { and, eq } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
-    const user_id = "123";
+    const user_id = auth().userId as string;
     const req: addToCart = await request.json();
     // console.log(req);
 
     try {
-        if (req) {
+        if (req && user_id) {
             await db
                 .insert(cartTable)
                 .values({
@@ -32,11 +33,11 @@ export async function POST(request: NextRequest) {
 }
 
 export async function PUT(request: NextRequest) {
-    const user_id = "123";
+    const user_id = auth().userId as string;
     const data: addToCart = await request.json();
 
     try {
-        if (data) {
+        if (data && user_id) {
             await db
                 .update(cartTable)
                 .set({
@@ -58,7 +59,7 @@ export async function PUT(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
     const url = request.nextUrl;
-    const user_id = "123";
+    const user_id = auth().userId as string;
     try {
         if (url.searchParams.has("product_id") && user_id) {
             const product_id = url.searchParams.get("product_id");

@@ -1,6 +1,7 @@
 import { getSingleProduct } from "@/../sanity/sanity-utils";
 import Image from "next/image";
 import AddToCartButton from "@/components/subcomponents/AddToCartButton";
+import { auth } from "@clerk/nextjs";
 
 interface Props {
     params: { title: string };
@@ -8,7 +9,7 @@ interface Props {
 export default async function Page({ params }: Props) {
     const slug = params.title;
     const product = await getSingleProduct(slug);
-    const defaultUserID = "123";
+    const user_id = auth().userId as string;
 
     return (
         <section className="container mx-auto py-20">
@@ -37,7 +38,7 @@ export default async function Page({ params }: Props) {
                             XL
                         </li>
                     </ul>
-                    <AddToCartButton product={product} userID={product.userID || defaultUserID} />
+                    <AddToCartButton product={product} userID={user_id} />
                 </div>
             </div>
         </section>

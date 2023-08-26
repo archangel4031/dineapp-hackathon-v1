@@ -5,7 +5,7 @@ import { useAppSelector } from "@/lib/redux/store";
 import Link from "next/link";
 import { ShoppingBag, ShoppingCart } from "lucide-react";
 
-const CartPage = () => {
+export default function CartPage() {
     const cartItems = useAppSelector((state) => state.cart.cartItems);
     const totalItems = useAppSelector((state) => state.cart.totalQuantity);
     const totalPrice = useAppSelector((state) => state.cart.totalPrice);
@@ -62,6 +62,4 @@ const CartPage = () => {
             </Wrapper>
         );
     }
-};
-
-export default CartPage;
+}

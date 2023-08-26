@@ -11,12 +11,12 @@ interface Props {
     cartItem: productInterface;
 }
 
-const CartItemCard = ({ cartItem }: Props) => {
+export default function CartItemCard({ cartItem }: Props) {
     const [isLoading, setIsLoading] = useState(false);
     const [qty, setQty] = useState(cartItem.quantity);
     const dispatch = useAppDispatch();
 
-    const handleCart = async (newQty: number) => {
+    async function handleCart(newQty: number) {
         setIsLoading(true);
         const newPrice = cartItem.price * newQty;
 
@@ -40,35 +40,35 @@ const CartItemCard = ({ cartItem }: Props) => {
             console.log((error as { message: string }).message);
         }
         setIsLoading(false);
-    };
+    }
 
-    const handleDelete = async () => {
+    async function handleDelete() {
         await fetch(`/api/cart/?product_id=${cartItem._id}`, {
             method: "DELETE",
         });
-    };
+    }
 
-    const increament = () => {
+    function increament() {
         handleCart(qty + 1);
         setQty(qty + 1);
         dispatch(cartAction.addToCart({ product: cartItem, quantity: 1 }));
         toast.success("Product quantity Increased");
-    };
+    }
 
-    const decreament = () => {
+    function decreament() {
         if (cartItem.quantity > 1) {
             handleCart(qty - 1);
             setQty(qty - 1);
             dispatch(cartAction.decrementCartProduct(cartItem._id));
             toast.success("Product quantity Decreased");
         }
-    };
+    }
 
-    const rmProduct = () => {
+    function rmProduct() {
         handleDelete();
         dispatch(cartAction.removeProduct(cartItem._id));
         toast.success("Item Removed from Cart");
-    };
+    }
 
     return (
         <div className="flex flex-col sm:flex-row items-center justify-center w-full px-5 py-7 gap-5 border-b border-gray-300 ">
@@ -112,5 +112,4 @@ const CartItemCard = ({ cartItem }: Props) => {
             <Toaster />
         </div>
     );
-};
-export default CartItemCard;
+}

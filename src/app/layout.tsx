@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ReduxProvider from "@/components/utils/ReduxProvider";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,20 +14,22 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
-        <ReduxProvider>
-            <html lang="en">
-                <body className={inter.className}>
-                    <header>
-                        <nav>
-                            <Navbar />
-                        </nav>
-                    </header>
-                    <main className="mx-20">{children}</main>
-                    <footer>
-                        <Footer />
-                    </footer>
-                </body>
-            </html>
-        </ReduxProvider>
+        <ClerkProvider>
+            <ReduxProvider>
+                <html lang="en">
+                    <body className={inter.className}>
+                        <header>
+                            <nav>
+                                <Navbar />
+                            </nav>
+                        </header>
+                        <main className="mx-20">{children}</main>
+                        <footer>
+                            <Footer />
+                        </footer>
+                    </body>
+                </html>
+            </ReduxProvider>
+        </ClerkProvider>
     );
 }
