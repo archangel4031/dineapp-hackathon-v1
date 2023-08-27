@@ -4,6 +4,7 @@ import Wrapper from "@/components/sections/CartWrapper";
 import { useAppSelector } from "@/lib/redux/store";
 import Link from "next/link";
 import { ShoppingBag, ShoppingCart } from "lucide-react";
+import StripeCheckoutButton from "@/components/subcomponents/StripeCheckoutButton";
 
 export default function CartPage() {
     const cartItems = useAppSelector((state) => state.cart.cartItems);
@@ -38,6 +39,9 @@ export default function CartPage() {
                                 <div>
                                     <p>${totalPrice}</p>
                                 </div>
+                            </div>
+                            <div>
+                                <StripeCheckoutButton products={cartItems} />
                             </div>
                         </div>
                     </div>
