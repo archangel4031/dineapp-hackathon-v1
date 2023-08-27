@@ -37,4 +37,6 @@ export interface CartState {
     cartItems: Array<productInterface>;
     totalPrice: number;
     totalQuantity: number;
+    isLoading: boolean;
+    error: any;
 }

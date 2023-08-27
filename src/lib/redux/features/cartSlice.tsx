@@ -1,5 +1,5 @@
 import { CartState } from "@/lib/interfaces";
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { productInterface } from "@/lib/interfaces";
 
@@ -7,7 +7,18 @@ const initialState: CartState = {
     cartItems: [],
     totalQuantity: 0,
     totalPrice: 0,
+    isLoading: false,
+    error: null,
 };
+
+export const fetchData = createAsyncThunk("cart/fetchData", async (userId: string) => {
+    const res = await fetch(`/api/cart/${userId}`);
+    if (!res.ok) {
+        console.log("Failed to fetch data");
+    }
+    const data = await res.json();
+    return data;
+});
 
 export const cartSlice = createSlice({
     name: "cart",
@@ -59,6 +70,25 @@ export const cartSlice = createSlice({
                 existingItem!.totalPrice = existingItem!.totalPrice || 0 - existingItem?.price!;
             }
         },
+    },
+
+    extraReducers: (builder) => {
+        builder.addCase(fetchData.pending, (state) => {
+            state.isLoading = true;
+        });
+
+        builder.addCase(fetchData.fulfilled, (state, action) => {
+            const { cartItems, totalQuantity, totalPrice } = action.payload;
+            state.cartItems = cartItems;
+            state.totalPrice = totalPrice;
+            state.totalQuantity = totalQuantity;
+            state.isLoading = false;
+        });
+
+        builder.addCase(fetchData.rejected, (state, action) => {
+            state.isLoading = false;
+            state.error = action.error;
+        });
     },
 });
 

@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ReduxProvider from "@/components/utils/ReduxProvider";
-import { ClerkProvider } from "@clerk/nextjs";
+import { ClerkProvider, auth } from "@clerk/nextjs";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,6 +13,7 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+    const userId = auth().userId as string;
     return (
         <ClerkProvider>
             <ReduxProvider>
@@ -20,7 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     <body className={inter.className}>
                         <header>
                             <nav>
-                                <Navbar />
+                                <Navbar userId={userId} />
                             </nav>
                         </header>
                         <main className="mx-20">{children}</main>

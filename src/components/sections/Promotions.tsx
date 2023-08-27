@@ -7,12 +7,8 @@ export default function Promotions() {
     return (
         <section>
             <div className="flex flex-col justify-center items-center">
-                <p className="text-blue-500 font-semibold tracking-wide uppercase">
-                    Promotions
-                </p>
-                <h1 className=" text-4xl font-extrabold tracking-wider">
-                    Our Promotion Events
-                </h1>
+                <p className="text-blue-500 font-semibold tracking-wide uppercase">Promotions</p>
+                <h1 className=" text-4xl font-extrabold tracking-wider">Our Promotion Events</h1>
             </div>
             <div className="flex mx-auto py-20">
                 {/* Horizontal Cards */}
@@ -20,25 +16,16 @@ export default function Promotions() {
                     {/* First Image Card */}
                     <div className="bg-gray-300 h-48 px-10 flex flex-row justify-between items-center">
                         <div>
-                            <h2 className="scroll-m-20 text-4xl font-bold tracking-wide">
-                                Get up to 60%
-                            </h2>
+                            <h2 className="scroll-m-20 text-4xl font-bold tracking-wide">Get up to 60%</h2>
                             <p className="text-xl">For the summer season</p>
                         </div>
                         <div className="relative h-full w-64">
-                            <Image
-                                src="/images/event1.webp"
-                                alt="Event 1"
-                                fill={true}
-                                style={{ objectFit: "fill" }}
-                            />
+                            <Image src="/images/event1.webp" alt="Event 1" fill={true} style={{ objectFit: "fill" }} />
                         </div>
                     </div>
                     {/* Second Image Card */}
                     <div className="bg-gray-900 text-white h-48 flex flex-col justify-center items-center">
-                        <h2 className="scroll-m-20 text-4xl font-bold tracking-wide mb-3">
-                            Get 30% Off
-                        </h2>
+                        <h2 className="scroll-m-20 text-4xl font-bold tracking-wide mb-3">Get 30% Off</h2>
                         <p className="text-xl">Use Promo Code</p>
                         <Button
                             variant="secondary"

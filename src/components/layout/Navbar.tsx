@@ -1,12 +1,17 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ShoppingCart } from "lucide-react";
-import { useAppSelector } from "@/lib/redux/store";
+import { useAppDispatch, useAppSelector } from "@/lib/redux/store";
 import { UserButton } from "@clerk/nextjs";
+import { fetchData } from "@/lib/redux/features/cartSlice";
 
-export default function Navbar() {
+export default function Navbar({ userId }: { userId: string }) {
+    const dispatch = useAppDispatch();
+    useEffect(() => {
+        dispatch(fetchData(userId));
+    }, [dispatch, userId]);
     const totalItems = useAppSelector((state) => state.cart.totalQuantity);
 
     return (
