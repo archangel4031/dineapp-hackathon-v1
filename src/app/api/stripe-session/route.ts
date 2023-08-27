@@ -8,7 +8,7 @@ const stripe = new Stripe(key, {
 });
 
 export async function POST(request: NextRequest) {
-    const userId = auth().userId as string;
+    const userId = auth().userId;
     const body = await request.json();
     const customer = await stripe.customers.create({
         metadata: {
